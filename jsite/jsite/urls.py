@@ -31,6 +31,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('analyze/', views.analyze, name='analyze'),
+    # path('ex1/', views.ex1, name='ex1'),
     # path('removepunc/', views.removepunc, name='removepunc'),
     # path('capitalizefirst/', views.capfirst, name='capfirst'),
     # path('newlineremove/', views.newlineremove, name='newlineremove'),

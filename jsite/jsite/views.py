@@ -67,25 +67,41 @@ def index(request):
 def index(request):
     return render(request, 'index.html')
 
+# def ex1(request):
+#     return render(request,'ex1.html')
+
 def analyze(request):
      #getting the text and displaying it in the terminal an URL as well!
     ujtext= request.GET.get('text', 'default')
     removepunc= request.GET.get('removepunc', 'off')
+    capitalize= request.GET.get('capitalize','off')
+    remove_punc=None
+    capitalized_text=None
     print(removepunc)
     print(ujtext)
     #Analyzing the text!
+    analyzed_text=ujtext
+    
     if removepunc=='on':
         punctuations="""!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"""   
-        analyzed=''
-        for char in ujtext:
-            if char not in punctuations:
-                analyzed= analyzed+char
-        jdict={'purpose':'Removed Punctuations', 'analyzed_text': analyzed}
-        return render(request,'analyze.html',jdict)
-    else:
-        return HttpResponse("""<h2>Check the remove Punctuations check box</h2>
-         <a href='/'><-- Back to Home!</a>""")    
+        analyzed_text=''.join(char for char in analyzed_text if char not in punctuations)
+        remove_punc=analyzed_text
+        # for char in ujtext:
+        #     if char not in punctuations:
+        #         analyzed_text= analyzed_text+char
+    if capitalize=='on':
+        analyzed_text=ujtext.upper()
+        capitalized_text=analyzed_text
 
+    if capitalize!='on' and removepunc!='on':
+        return HttpResponse("""<h2>Check atleast one of the check boxes</h2>
+         <a href='/'><-- Back to Home!</a>""")    
+    jdict = {
+        'purpose': 'Text Processed',
+        'remove_punctuations': remove_punc,
+        'CAPITALIZED': capitalized_text
+    }
+    return render(request, 'analyze.html', jdict)
 # def removepunc(request):
 #      #getting the text and displaying it in the terminal an URL as well!
 #     ujtext= request.GET.get('text', 'default')
