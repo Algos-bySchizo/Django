@@ -4,7 +4,7 @@ from django.http import HttpResponse
 
 """ Code for Video-6 (Perosnal Navigator) """
 
-def index(request):
+def index(request):    
     return HttpResponse('''<h1>homepage</h1>
                         <ul> 
                             <li><a href="https://www.youtube.com/watch?v=AepgWsROO4k&list=PLu0W_9lII9ah7DDtYtflgwMwpT3xmjXY9&index=7"> Django CodeWithHarry </a></li>
@@ -70,15 +70,22 @@ def index(request):
 def analyze(request):
      #getting the text and displaying it in the terminal an URL as well!
     ujtext= request.GET.get('text', 'default')
-    removepunc= request.GET.get('removepunc', 'default')
+    removepunc= request.GET.get('removepunc', 'off')
     print(removepunc)
     print(ujtext)
     #Analyzing the text!
-    
-    return HttpResponse(""" 
-        <h2>Remove Punctuations</h2>
-        <a href='/'><-- Back to Home!</a>
-                        """)
+    if removepunc=='on':
+        punctuations="""!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"""   
+        analyzed=''
+        for char in ujtext:
+            if char not in punctuations:
+                analyzed= analyzed+char
+        jdict={'purpose':'Removed Punctuations', 'analyzed_text': analyzed}
+        return render(request,'analyze.html',jdict)
+    else:
+        return HttpResponse("""<h2>Check the remove Punctuations check box</h2>
+         <a href='/'><-- Back to Home!</a>""")    
+
 # def removepunc(request):
 #      #getting the text and displaying it in the terminal an URL as well!
 #     ujtext= request.GET.get('text', 'default')
