@@ -75,6 +75,8 @@ def analyze(request):
     ujtext= request.GET.get('text', 'default')
     removepunc= request.GET.get('removepunc', 'off')
     capitalize= request.GET.get('capitalize','off')
+    print(removepunc)
+    print(capitalize)
     remove_punc=None
     capitalized_text=None
     print(removepunc)
