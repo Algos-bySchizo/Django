@@ -97,7 +97,13 @@ def analyze(request):
     
     if removepunc=='on':
         punctuations="""!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"""   
-        analyzed_text=''.join(char for char in analyzed_text if char not in punctuations)
+        # analyzed_text=''.join(char for char in analyzed_text if char not in punctuations)
+        analyzed_text=''
+        for char in ujtext:
+            if char not in punctuations:
+                analyzed_text+=char
+            elif char=="\n":
+                analyzed_text+=char
         remove_punc=analyzed_text
         # for char in ujtext:
         #     if char not in punctuations:
