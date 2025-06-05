@@ -117,7 +117,7 @@ def analyze(request):
                 pass
             else:
                 analyzed_text+=char
-
+                space_remover=analyzed_text
     elif capitalize!='on' and removepunc!='on' and newlineremover!='on':
         return HttpResponse("""<h2>Check atleast one of the check boxes</h2>
          <a href='/'><-- Back to Home!</a>""")    
