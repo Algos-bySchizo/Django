@@ -75,10 +75,13 @@ def analyze(request):
     ujtext= request.GET.get('text', 'default')
     removepunc= request.GET.get('removepunc', 'off')
     capitalize= request.GET.get('capitalize','off')
+    newlineremover=request.GET.get('newlineremover','off')
     print(removepunc)
     print(capitalize)
+    print(newlineremover)
     remove_punc=None
     capitalized_text=None
+    new_line_remover=None
     print(removepunc)
     print(ujtext)
     #Analyzing the text!
@@ -94,6 +97,14 @@ def analyze(request):
     if capitalize=='on':
         analyzed_text=ujtext.upper()
         capitalized_text=analyzed_text
+    
+    if newlineremover=='on':
+        analyzed_text=''
+        for char in analyzed_text:
+            if char!='\n':
+                analyzed_text=analyzed_text+char.upper()
+        new_line_remover=analyzed_text
+
 
     if capitalize!='on' and removepunc!='on':
         return HttpResponse("""<h2>Check atleast one of the check boxes</h2>
@@ -101,7 +112,8 @@ def analyze(request):
     jdict = {
         'purpose': 'Text Processed',
         'remove_punctuations': remove_punc,
-        'CAPITALIZED': capitalized_text
+        'CAPITALIZED': capitalized_text,
+        'NewLineRemover': new_line_remover,
     }
     return render(request, 'analyze.html', jdict)
 # def removepunc(request):
