@@ -113,9 +113,7 @@ def analyze(request):
     if spaceremover=='on':
         analyzed_text=''
         for index, char in enumerate(ujtext):
-            if ujtext[index]==' ' and ujtext[index+1]==' ':
-                pass
-            else:
+            if not(ujtext[index]==' ' and ujtext[index+1]==' '):
                 analyzed_text+=char
                 space_remover=analyzed_text
     elif capitalize!='on' and removepunc!='on' and newlineremover!='on':
