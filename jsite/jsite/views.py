@@ -76,12 +76,18 @@ def analyze(request):
     removepunc= request.GET.get('removepunc', 'off')
     capitalize= request.GET.get('capitalize','off')
     newlineremover=request.GET.get('newlineremover','off')
+    spaceremover=request.GET.get('spaceremover','off')
+    # the print statements lets me know in the console if I've checked the check boxes or not and if the  
+    # check boxes are checked and function is still not performing as it should that means there's a logical issue in the code
     print(removepunc)
     print(capitalize)
     print(newlineremover)
+    print(spaceremover)
     remove_punc=None
     capitalized_text=None
     new_line_remover=None
+    space_remover=None
+    # the print statement below tells me what I've given in as input
     print(ujtext)
     #Analyzing the text!
     analyzed_text=ujtext
@@ -103,6 +109,14 @@ def analyze(request):
             if char!='\n':
                 analyzed_text+=char
                 new_line_remover=analyzed_text
+    
+    if spaceremover=='on':
+        analyzed_text=''
+        for index, char in enumerate(ujtext):
+            if ujtext[index]==' ' and ujtext[index+1]==' ':
+                pass
+            else:
+                analyzed_text+=char
 
     elif capitalize!='on' and removepunc!='on' and newlineremover!='on':
         return HttpResponse("""<h2>Check atleast one of the check boxes</h2>
@@ -112,7 +126,7 @@ def analyze(request):
         'remove_punctuations': remove_punc,
         'CAPITALIZED': capitalized_text,
         'NewLineRemover': new_line_remover,
-    }
+        'spaceremover': space_remover   }
     return render(request, 'analyze.html', jdict)
 # def removepunc(request):
 #      #getting the text and displaying it in the terminal an URL as well!
