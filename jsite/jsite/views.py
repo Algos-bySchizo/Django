@@ -82,7 +82,6 @@ def analyze(request):
     remove_punc=None
     capitalized_text=None
     new_line_remover=None
-    print(removepunc)
     print(ujtext)
     #Analyzing the text!
     analyzed_text=ujtext
@@ -100,13 +99,12 @@ def analyze(request):
     
     if newlineremover=='on':
         analyzed_text=''
-        for char in analyzed_text:
+        for char in ujtext:
             if char!='\n':
-                analyzed_text=analyzed_text+char.upper()
-        new_line_remover=analyzed_text
+                analyzed_text+=char
+                new_line_remover=analyzed_text
 
-
-    if capitalize!='on' and removepunc!='on':
+    elif capitalize!='on' and removepunc!='on' and newlineremover!='on':
         return HttpResponse("""<h2>Check atleast one of the check boxes</h2>
          <a href='/'><-- Back to Home!</a>""")    
     jdict = {
