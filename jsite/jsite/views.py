@@ -77,16 +77,19 @@ def analyze(request):
     capitalize= request.GET.get('capitalize','off')
     newlineremover=request.GET.get('newlineremover','off')
     spaceremover=request.GET.get('spaceremover','off')
+    charcounter=request.GET.get('charcounter','off')
     # the print statements lets me know in the console if I've checked the check boxes or not and if the  
     # check boxes are checked and function is still not performing as it should that means there's a logical issue in the code
     print(removepunc)
     print(capitalize)
     print(newlineremover)
     print(spaceremover)
+    print(charcounter)
     remove_punc=None
     capitalized_text=None
     new_line_remover=None
     space_remover=None
+    char_counter=None
     # the print statement below tells me what I've given in as input
     print(ujtext)
     #Analyzing the text!
@@ -103,6 +106,10 @@ def analyze(request):
         analyzed_text=ujtext.upper()
         capitalized_text=analyzed_text
     
+    if charcounter=='on':
+        analyzed_text=len(ujtext)
+        char_counter=analyzed_text
+    
     if newlineremover=='on':
         analyzed_text=''
         for char in ujtext:
@@ -116,14 +123,17 @@ def analyze(request):
             if not(ujtext[index]==' ' and ujtext[index+1]==' '):
                 analyzed_text+=char
                 space_remover=analyzed_text
-    elif capitalize!='on' and removepunc!='on' and newlineremover!='on':
+
+    elif capitalize!='on' and removepunc!='on' and newlineremover!='on' and charcounter=='on' and spaceremover=='on':
         return HttpResponse("""<h2>Check atleast one of the check boxes</h2>
          <a href='/'><-- Back to Home!</a>""")    
+    
     jdict = {
-        'purpose': 'Text Processed',
+        'purpose': 'Processed',
         'remove_punctuations': remove_punc,
         'CAPITALIZED': capitalized_text,
         'NewLineRemover': new_line_remover,
+        'charcounter': char_counter,
         'spaceremover': space_remover   }
     return render(request, 'analyze.html', jdict)
 # def removepunc(request):
