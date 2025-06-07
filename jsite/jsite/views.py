@@ -73,11 +73,11 @@ def index(request):
 def analyze(request):
      #getting the text and displaying it in the terminal an URL as well!
     ujtext= request.POST.get('text', 'default')
-    removepunc= request.GET.get('removepunc', 'off')
-    capitalize= request.GET.get('capitalize','off')
-    newlineremover=request.GET.get('newlineremover','off')
-    spaceremover=request.GET.get('spaceremover','off')
-    charcounter=request.GET.get('charcounter','off')
+    removepunc= request.POST.get('removepunc', 'off')
+    capitalize= request.POST.get('capitalize','off')
+    newlineremover=request.POST.get('newlineremover','off')
+    spaceremover=request.POST.get('spaceremover','off')
+    charcounter=request.POST.get('charcounter','off')
     # the print statements lets me know in the console if I've checked the check boxes or not and if the  
     # check boxes are checked and function is still not performing as it should that means there's a logical issue in the code
     print(removepunc)
@@ -119,7 +119,7 @@ def analyze(request):
     if newlineremover=='on':
         analyzed_text=''
         for char in ujtext:
-            if char!='\n':
+            if char!='\n' and char!='\r':
                 analyzed_text+=char
                 new_line_remover=analyzed_text
     

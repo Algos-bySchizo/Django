@@ -36,29 +36,41 @@
   <strong>Alert! Task Has Been Perform Successfully!</strong> Text has been analyzed!
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
-<div class="container">
-    <button onclick="window.location.href='/'">back to home</button>
-    <!-- <a href="/"><-- back to home</a> -->
-    <h1>Your analyzed text for removing punctuations ==> {{purpose}}</h1>
+<div class="container border border-4 mt-5 bg-light">
+    <!-- <button onclick="window.location.href='/'">back to home</button>
+    <a href="/"><-- back to home</a> -->
+    <ul>
+    <li><h1>Your analyzed text for Removing Punctuations ==> {{purpose}}</h1>
     <p>
         <pre>{{remove_punctuations}}</pre>
     </p>
-    <h1>Your analyzed text for capitalizing ==> {{purpose}}</h1>
+    </li>
+    <li>
+    <h1>Your analyzed text for Capitalizing ==> {{purpose}}</h1>
     <p>
         <pre>{{CAPITALIZED}}</pre>
     </p>
-    <h1>Your analyzed text for capitalizing ==> {{purpose}}</h1>
+    </li>
+    <li>
+    <h1>Your analyzed text for New Line Removing ==> {{purpose}}</h1>
     <p>
         <pre>{{NewLineRemover}}</pre>
     </p>
-    <h1>Your analyzed text for Removing extra spaces ==> {{purpose}}</h1>
+    </li>
+    <li>
+    <h1>Your analyzed text for Removing Extra Spaces ==> {{purpose}}</h1>
     <p>
         <pre>{{spaceremover}}</pre>
     </p>
+    </li>
+    <li>
     <h1>Your analyzed text for Counting Characters ==> {{purpose}}</h1>
     <p>
         <pre>{{charcounter}}</pre>
     </p>
+    </li>
+    </ul>
+    <a class="btn btn-primary mb-3" href="/" role="button">Back to home!</a>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
   </body>
 </html>
