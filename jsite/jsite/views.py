@@ -71,77 +71,42 @@ def index(request):
 #     return render(request,'ex1.html')
 
 def analyze(request):
-     #getting the text and displaying it in the terminal an URL as well!
-    ujtext= request.POST.get('text', 'default')
-    removepunc= request.POST.get('removepunc', 'off')
-    capitalize= request.POST.get('capitalize','off')
-    newlineremover=request.POST.get('newlineremover','off')
-    spaceremover=request.POST.get('spaceremover','off')
-    charcounter=request.POST.get('charcounter','off')
-    # the print statements lets me know in the console if I've checked the check boxes or not and if the  
-    # check boxes are checked and function is still not performing as it should that means there's a logical issue in the code
-    print(removepunc)
-    print(capitalize)
-    print(newlineremover)
-    print(spaceremover)
-    print(charcounter)
-    remove_punc=None
-    capitalized_text=None
-    new_line_remover=None
-    space_remover=None
-    char_counter=None
-    # the print statement below tells me what I've given in as input
-    print(ujtext)
-    #Analyzing the text!
-    analyzed_text=ujtext
-    
-    if removepunc=='on':
-        punctuations="""!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"""   
-        # analyzed_text=''.join(char for char in analyzed_text if char not in punctuations)
-        analyzed_text=''
-        for char in ujtext:
-            if char not in punctuations:
-                analyzed_text+=char
-            elif char=="\n":
-                analyzed_text+=char
-        remove_punc=analyzed_text
-        # for char in ujtext:
-        #     if char not in punctuations:
-        #         analyzed_text= analyzed_text+char
-    if capitalize=='on':
-        analyzed_text=ujtext.upper()
-        capitalized_text=analyzed_text
-    
-    if charcounter=='on':
-        analyzed_text=len(ujtext)
-        char_counter=analyzed_text
-    
-    if newlineremover=='on':
-        analyzed_text=''
-        for char in ujtext:
-            if char!='\n' and char!='\r':
-                analyzed_text+=char
-                new_line_remover=analyzed_text
-    
-    if spaceremover=='on':
-        analyzed_text=''
-        for index, char in enumerate(ujtext):
-            if not(ujtext[index]==' ' and ujtext[index+1]==' '):
-                analyzed_text+=char
-                space_remover=analyzed_text
+    ujtext = request.POST.get('text', 'default')
+    removepunc = request.POST.get('removepunc', 'off')
+    capitalize = request.POST.get('capitalize','off')
+    newlineremover = request.POST.get('newlineremover','off')
+    spaceremover = request.POST.get('spaceremover','off')
+    charcounter = request.POST.get('charcounter','off')
 
-    if capitalize!='on' and removepunc!='on' and newlineremover!='on' and charcounter!='on' and spaceremover!='on':
-        return HttpResponse("""<h2>Check atleast one of the check boxes</h2>
-         <a href='/'><-- Back to Home!</a>""")    
-    
-    jdict = {
-        'purpose': 'Processed',
-        'remove_punctuations': remove_punc,
-        'CAPITALIZED': capitalized_text,
-        'NewLineRemover': new_line_remover,
-        'charcounter': char_counter,
-        'spaceremover': space_remover   }
-    return render(request, 'analyze.html', jdict)
+    print(removepunc, capitalize, newlineremover, spaceremover, charcounter)
+    print(ujtext)
+
+    if (removepunc != 'on' and capitalize != 'on' and newlineremover != 'on' and spaceremover != 'on' and charcounter != 'on'):
+        return HttpResponse("""<h2>Check at least one of the checkboxes</h2>
+         <a href='/'><-- Back to Home!</a>""")
+
+    analyzed = ujtext
+
+    if removepunc == 'on':
+        punctuations = '''!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~'''
+        analyzed = ''.join(char for char in analyzed if char not in punctuations)
+
+    if capitalize == 'on':
+        analyzed = analyzed.upper()
+
+    if newlineremover == 'on':
+        analyzed = ''.join(char for char in analyzed if char != '\n' and char != '\r')
+
+    if spaceremover == 'on':
+        analyzed = ' '.join(analyzed.split())
+
+    countedanalyzed = len(analyzed) if charcounter == 'on' else None
+
+    return render(request, 'analyze.html', {
+        'purpose': 'Text Processed',
+        'analyzed': analyzed,
+        'countedanalyzed': countedanalyzed,
+    })
 # def removepunc(request):
 #      #getting the text and displaying it in the terminal an URL as well!
 #     ujtext= request.GET.get('text', 'default')
