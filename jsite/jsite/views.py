@@ -72,7 +72,7 @@ def index(request):
 
 def analyze(request):
      #getting the text and displaying it in the terminal an URL as well!
-    ujtext= request.GET.get('text', 'default')
+    ujtext= request.POST.get('text', 'default')
     removepunc= request.GET.get('removepunc', 'off')
     capitalize= request.GET.get('capitalize','off')
     newlineremover=request.GET.get('newlineremover','off')
