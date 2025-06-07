@@ -76,14 +76,13 @@ def analyze(request):
     capitalize = request.POST.get('capitalize','off')
     newlineremover = request.POST.get('newlineremover','off')
     spaceremover = request.POST.get('spaceremover','off')
-    charcounter = request.POST.get('charcounter','off')
+    charcounter = request.POST.get('charcounter',' off')
 
     print(removepunc, capitalize, newlineremover, spaceremover, charcounter)
     print(ujtext)
 
     if (removepunc != 'on' and capitalize != 'on' and newlineremover != 'on' and spaceremover != 'on' and charcounter != 'on'):
-        return HttpResponse("""<h2>Check at least one of the checkboxes</h2>
-         <a href='/'><-- Back to Home!</a>""")
+        return render(request,'error_when_no_util.html')
 
     analyzed = ujtext
 
@@ -100,12 +99,12 @@ def analyze(request):
     if spaceremover == 'on':
         analyzed = ' '.join(analyzed.split())
 
-    countedanalyzed = len(analyzed) if charcounter == 'on' else None
+    countedanalyzed = len(analyzed) if charcounter == 'on' else charcounter 
 
     return render(request, 'analyze.html', {
-        'purpose': 'Text Processed',
+        'purpose': 'Processed',
         'analyzed': analyzed,
-        'countedanalyzed': countedanalyzed,
+        'countedanalyzed': 'char count'+countedanalyzed,
     })
 # def removepunc(request):
 #      #getting the text and displaying it in the terminal an URL as well!
