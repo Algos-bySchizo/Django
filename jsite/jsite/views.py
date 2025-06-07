@@ -76,7 +76,7 @@ def analyze(request):
     capitalize = request.POST.get('capitalize','off')
     newlineremover = request.POST.get('newlineremover','off')
     spaceremover = request.POST.get('spaceremover','off')
-    charcounter = request.POST.get('charcounter',' off')
+    charcounter = request.POST.get('charcounter','off')
 
     print(removepunc, capitalize, newlineremover, spaceremover, charcounter)
     print(ujtext)
@@ -99,12 +99,12 @@ def analyze(request):
     if spaceremover == 'on':
         analyzed = ' '.join(analyzed.split())
 
-    countedanalyzed = len(analyzed) if charcounter == 'on' else charcounter 
+    countedanalyzed = len(analyzed) if charcounter == 'on' else 'char counter off' 
 
     return render(request, 'analyze.html', {
         'purpose': 'Processed',
         'analyzed': analyzed,
-        'countedanalyzed': 'char count'+countedanalyzed,
+        'countedanalyzed': countedanalyzed,
     })
 # def removepunc(request):
 #      #getting the text and displaying it in the terminal an URL as well!
