@@ -51,9 +51,8 @@
     <div class="container">
       <form class="form" action="/analyze/" method="post"> {% csrf_token %}
         <div class="mb-3">
-          <h1><span id="typed-text" style="color: black;"></span></h1>
-          <label for="exampleFormControlTextarea1" class="form-label">Text
-            Area</label>
+          <br>
+          <label for="exampleFormControlTextarea1" class="form-label"><h2><span id="typed-text" style="color: black;"></span></h2></label>
           <textarea class="form-control" id="exampleFormControlTextarea1"
             name='text' rows="9"></textarea>
         </div>
@@ -97,9 +96,10 @@
     <script>
   var typed = new Typed('#typed-text', {
     strings: ['Welcome to TextUtils!', 'Analyze your text like a pro.', 'Fast, Clean & Powerful.'],
-    typeSpeed: 50,
-    backSpeed: 30,
-    loop: true
+    typeSpeed: 10,
+    backSpeed: 10,
+    loop: true,
+    smartBackspace: false
   });
 </script>
   </body>
