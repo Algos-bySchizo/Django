@@ -16,8 +16,8 @@ def analyze(request):
     spaceremover = request.POST.get('spaceremover','off')
     charcounter = request.POST.get('charcounter','off')
     countedanalyzed=None
-    print(removepunc, capitalize, newlineremover, spaceremover, charcounter)
-    print(ujtext)
+    # print(removepunc, capitalize, newlineremover, spaceremover, charcounter)
+    # print(ujtext)
     purposes=[]
     if (removepunc != 'on' and capitalize != 'on' and newlineremover != 'on' and spaceremover != 'on' and charcounter != 'on'):
         return render(request,'error_when_no_util.html')
