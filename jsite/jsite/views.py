@@ -1,6 +1,6 @@
 #I have created this file ~ Junaidy!!
 from django.shortcuts import render
-from django.http import HttpResponse
+# from django.http import HttpResponse
 
 def index(request):
     return render(request, 'index.html')
@@ -15,7 +15,7 @@ def analyze(request):
     newlineremover = request.POST.get('newlineremover','off')
     spaceremover = request.POST.get('spaceremover','off')
     charcounter = request.POST.get('charcounter','off')
-    countedanalyzed= f"character count : {charcounter}" 
+    countedanalyzed=None
     print(removepunc, capitalize, newlineremover, spaceremover, charcounter)
     print(ujtext)
     purposes=[]
